@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "Person.h"
+#import "NSObject+CaculatorMaker.h"
 
 @interface ViewController ()
 
@@ -33,6 +34,12 @@
     
     per.eat(@"pizza").run(5000.0);
     
+    
+    double t = [NSObject makeCaculators:^(Caculator *make) {
+        make.add(5.3).sub(1.2).divide(2.7);
+    }];
+    
+    NSLog(@"%f",t);
     
 }
 

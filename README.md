@@ -115,3 +115,37 @@
 	per.eat(@"pizza").run(5000.0);
 
 
+
+最后,写个计算机的功能
+	
+	//1.先定义个Caculator类,继承自NSObject
+	
+		/** 计算的结果 */
+		@property (nonatomic , assign) double result;
+		
+		/// 加法
+		- (Caculator *(^)(double))add;
+		/// 减法
+		- (Caculator *(^)(double))sub;
+		/// 乘法
+		- (Caculator *(^)(double))muilt;
+		/// 除法
+		- (Caculator *(^)(double))divide;
+	
+	
+	//2.写个NSObject的分类,定义个类方法
+		+ (double)makeCaculators:(void (^)(Caculator *make))caculatorBlock;
+		
+		+ (double)makeCaculators:(void (^)(Caculator *make))caculatorBlock {
+    			Caculator *clt = [[Caculator alloc] init];
+    			caculatorBlock(clt);
+    			return clt.result;
+		}
+		
+	//3.调用
+	double t = [NSObject makeCaculators:^(Caculator *make) {
+        make.add(5.3).sub(1.2).divide(2.7);
+    }];
+	
+
+
